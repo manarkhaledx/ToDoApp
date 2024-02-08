@@ -1,0 +1,46 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.ToDo" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorPrimaryDark">#254875</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="android:statusBarColor">@color/blue</item>
+        <item name="floatingActionButtonStyle">@style/fab_style</item>
+        <item name="textInputOutlinedStyle">@style/CustomOutlinedBox</item>
+        <!--<item name="android:homeAsUpIndicator">@drawable/back</item> -->
+    </style>
+
+    <style name="Theme.ToDo" parent="Base.Theme.ToDo" />
+
+    <style name="toolbar_title_style">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@color/text_color</item>
+        <item name="android:layout_margin">20dp</item>
+    </style>
+
+    <style name="toolbar_style" parent="Base.ThemeOverlay.AppCompat">
+        <item name="android:colorControlNormal">@color/white</item>
+    </style>
+
+    <style name="fab_style" parent="Widget.Design.FloatingActionButton">
+        <item name="shapeAppearanceOverlay">@style/fab_rounded</item>
+    </style>
+
+    <style name="fab_rounded" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+        <item name="background">@drawable/button_bg</item>
+    </style>
+
+    <style name="CustomOutlinedBox" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <!-- Customize other attributes as needed -->
+        <item name="hintTextAppearance">@style/CustomHintText</item>
+    </style>
+
+    <style name="CustomHintText" parent="TextAppearance.AppCompat.Body1">
+        <!-- Set the hint text color -->
+        <item name="android:textColor">@color/blue</item>
+    </style>
+
+</resources>
