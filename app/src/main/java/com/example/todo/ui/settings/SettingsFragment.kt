@@ -1,4 +1,4 @@
-package com.example.todo.ui.home.settings
+package com.example.todo.ui.settings
 
 import android.content.res.Configuration
 import android.os.Bundle

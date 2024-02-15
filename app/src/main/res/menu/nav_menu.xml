@@ -2,13 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/tasks_menu_item"
+        android:id="@+id/nav_task"
         android:title="@string/tasks"
         android:icon="@drawable/ic_tasks"
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/settings_menu_item"
+        android:id="@+id/nav_settings"
         android:title="@string/settings"
         android:icon="@drawable/ic_settings"
         app:showAsAction="always" />
