@@ -23,7 +23,7 @@
             android:layout_width="90dp"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-
+            android:background="@drawable/delete"
             android:gravity="center"
             android:paddingStart="24dp"
             android:paddingEnd="24dp"
@@ -34,6 +34,7 @@
             android:layout_width="90dp"
             android:layout_height="match_parent"
             android:layout_gravity="end"
+            android:background="@drawable/edit"
             android:gravity="center"
             android:paddingStart="24dp"
             android:paddingEnd="24dp" />
@@ -53,6 +54,7 @@
             app:layout_constraintVertical_bias="0.5">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/item_layout"
                 android:layout_width="match_parent"
                 android:layout_height="120dp">
 
@@ -108,7 +110,21 @@
                     app:layout_constraintHeight_percent=".35"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintWidth_percent=".2" />
-
+                <TextView
+                    android:id="@+id/tv_task_Done"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_margin="20dp"
+                    android:text="@string/done"
+                    android:textStyle="bold"
+                    android:textColor="#55CC00"
+                    android:textSize="25sp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_percent=".35"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent=".2" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

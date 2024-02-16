@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.example.todo.database.TaskDataBase
 import com.example.todo.databinding.FragmentTasksBinding
 import com.prolificinteractive.materialcalendarview.CalendarDay
+import com.zerobranch.layout.SwipeLayout
 import java.util.Calendar
 
 class TasksListFragment:Fragment() {
@@ -30,6 +31,7 @@ class TasksListFragment:Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setUpViews()
 
+
     }
 val currentDate=Calendar.getInstance()
      fun retrieveTaskList() {
@@ -48,5 +50,5 @@ val currentDate=Calendar.getInstance()
             }
         }
         viewBinding.calendarView.selectedDate=CalendarDay.today()
-    }
+}
 }

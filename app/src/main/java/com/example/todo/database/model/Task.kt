@@ -10,11 +10,10 @@ data class Task(
     val id:Int=0,
     @ColumnInfo
     val title:String,
-
     @ColumnInfo
     val content:String?=null,
     @ColumnInfo
-    val isDone:Boolean=false,
+    var isDone:Boolean=false,
     @ColumnInfo
     val date:Long?=null,
     @ColumnInfo
