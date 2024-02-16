@@ -19,7 +19,7 @@ class HomeActivity : AppCompatActivity() {
         setupViews()
     }
 
-    private fun setupViews() {
+    private fun setupViews()  {
         viewBinding.bottomNavigation.setOnItemSelectedListener {
             if (it.itemId == R.id.nav_task) {
                 showFragment(TasksListFragment())
@@ -38,6 +38,14 @@ class HomeActivity : AppCompatActivity() {
     private fun showAddTaskBottomSheet() {
         currentBottomSheet?.dismissAllowingStateLoss()
         val addTaskBottomSheet = AddTaskButtomSheet()
+        addTaskBottomSheet.onTaskAddedListener=AddTaskButtomSheet.OnTaskAddedListener {
+            //notifity task list fragment
+            supportFragmentManager.fragments.forEach{fragment->
+                if(fragment is TasksListFragment && fragment.isAdded){
+                    fragment.retrieveTaskList()
+                }
+            }
+        }
         addTaskBottomSheet.show(supportFragmentManager, null)
         currentBottomSheet = addTaskBottomSheet
     }
