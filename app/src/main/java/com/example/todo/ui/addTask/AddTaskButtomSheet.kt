@@ -19,7 +19,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.util.Calendar
 
 class AddTaskButtomSheet : BottomSheetDialogFragment() {
-    lateinit var viewbinding: FragmentAddTaskBinding
+    private lateinit var viewbinding: FragmentAddTaskBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -67,7 +67,7 @@ class AddTaskButtomSheet : BottomSheetDialogFragment() {
         timePickerDialog.show()
     }
 
-    val calendar = Calendar.getInstance()
+    val calendar: Calendar = Calendar.getInstance()
 
     private fun showDatePicker() {
         val datePicker = DatePickerDialog(
@@ -126,6 +126,7 @@ class AddTaskButtomSheet : BottomSheetDialogFragment() {
         onTaskAddedListener?.onTaskAdded()
 
     }
+
     var onTaskAddedListener: OnTaskAddedListener?=null
     fun interface OnTaskAddedListener{
         fun onTaskAdded()
