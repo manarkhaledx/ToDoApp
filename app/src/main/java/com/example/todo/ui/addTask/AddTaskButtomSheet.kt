@@ -20,6 +20,7 @@ import java.util.Calendar
 
 class AddTaskButtomSheet : BottomSheetDialogFragment() {
     private lateinit var viewbinding: FragmentAddTaskBinding
+    private var taskToEdit: Task? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -32,6 +33,7 @@ class AddTaskButtomSheet : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpViews()
+        taskToEdit?.let { populateFields(it) }
 
     }
 
@@ -125,6 +127,27 @@ class AddTaskButtomSheet : BottomSheetDialogFragment() {
         dismiss()
         onTaskAddedListener?.onTaskAdded()
 
+    }
+
+
+
+
+    private fun populateFields(task: Task) {
+        viewbinding.title.setText(task.title)
+        viewbinding.description.setText(task.content)
+
+        val calendar = Calendar.getInstance().apply {
+            timeInMillis = task.date!!
+        }
+        viewbinding.dateTv.text = calendar.formateDate()
+        viewbinding.timeTv.text = calendar.formateTime()
+    }
+
+
+    // Your existing methods
+
+    fun editTask(task: Task) {
+        taskToEdit = task
     }
 
     var onTaskAddedListener: OnTaskAddedListener?=null
