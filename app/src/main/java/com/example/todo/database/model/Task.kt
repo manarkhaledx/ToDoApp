@@ -1,23 +1,21 @@
-package com.example.todo.ui.home.tasks
+package com.example.todo.database.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity()
+@Entity
 data class Task(
     @PrimaryKey(autoGenerate = true)
-    val id:Int=0,
+    val id: Int = 0,
     @ColumnInfo
-    val title:String,
+    var title: String,
     @ColumnInfo
-    val content:String?=null,
+    var content: String? = null,
     @ColumnInfo
-    var isDone:Boolean=false,
+    var isDone: Boolean = false,
     @ColumnInfo
-    val date:Long?=null,
+    var date: Long? = null,
     @ColumnInfo
-    val time:Long?=null
-){
-
-}
+    var time: Long? = null
+)

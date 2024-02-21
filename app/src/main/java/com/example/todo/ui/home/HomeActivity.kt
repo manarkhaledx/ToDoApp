@@ -5,8 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.todo.R
 import com.example.todo.databinding.ActivityHomeBinding
-import com.example.todo.ui.addTask.AddTaskButtomSheet
 import com.example.todo.ui.settings.SettingsFragment
+import com.example.todo.ui.tasks.AddTaskButtomSheet
 import com.example.todo.ui.tasks.TasksListFragment
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
@@ -19,7 +19,7 @@ class HomeActivity : AppCompatActivity() {
         setupViews()
     }
 
-    private fun setupViews()  {
+    private fun setupViews() {
         viewBinding.bottomNavigation.setOnItemSelectedListener {
             if (it.itemId == R.id.nav_task) {
                 showFragment(TasksListFragment())
@@ -38,10 +38,10 @@ class HomeActivity : AppCompatActivity() {
     private fun showAddTaskBottomSheet() {
         currentBottomSheet?.dismissAllowingStateLoss()
         val addTaskBottomSheet = AddTaskButtomSheet()
-        addTaskBottomSheet.onTaskAddedListener=AddTaskButtomSheet.OnTaskAddedListener {
-            //notifity task list fragment
-            supportFragmentManager.fragments.forEach{fragment->
-                if(fragment is TasksListFragment && fragment.isAdded){
+        addTaskBottomSheet.onTaskAddedListener = AddTaskButtomSheet.OnTaskAddedListener {
+            //notify task list fragment
+            supportFragmentManager.fragments.forEach { fragment ->
+                if (fragment is TasksListFragment && fragment.isAdded) {
                     fragment.retrieveTaskList()
                 }
             }

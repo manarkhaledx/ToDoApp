@@ -8,9 +8,8 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todo.database.TaskDataBase
+import com.example.todo.database.model.Task
 import com.example.todo.databinding.ItemTaskBinding
-import com.example.todo.ui.addTask.AddTaskButtomSheet
-import com.example.todo.ui.home.tasks.Task
 import com.zerobranch.layout.SwipeLayout
 
 
@@ -73,10 +72,10 @@ class TasksAdapter(private var taskList: MutableList<Task> = mutableListOf()) :
                 } else if (direction == SwipeLayout.LEFT && position != RecyclerView.NO_POSITION) {
                     val fragmentManager =
                         (holder.context as FragmentActivity).supportFragmentManager
-                    val bottomSheetFragment = AddTaskButtomSheet()
+                    val bottomSheetFragment = EditTaskButtomSheet()
                     holder.binding.swipeLayout.close(true)
                     bottomSheetFragment.show(fragmentManager, bottomSheetFragment.tag)
-                    bottomSheetFragment.editTask(task)
+                    bottomSheetFragment.taskToEdit = taskList[position]
                     TaskDataBase.getInstance().getTaskDao().updateTask(task)
                     notifyDataSetChanged()
                 }

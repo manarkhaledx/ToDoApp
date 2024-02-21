@@ -1,29 +1,34 @@
-import android.icu.text.SimpleDateFormat
+import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Locale
 
 object CalendarExtensions {
     fun Calendar.getDateOnly(): Long {
         val calendar = Calendar.getInstance()
         calendar.time = this.time
-        calendar.set(get(Calendar.YEAR), get(Calendar.MONTH), get(Calendar.DATE), 0, 0, 0)
+        calendar.set(Calendar.HOUR_OF_DAY, 0)
+        calendar.set(Calendar.MINUTE, 0)
+        calendar.set(Calendar.SECOND, 0)
         calendar.set(Calendar.MILLISECOND, 0)
-        return calendar.time.time
+        return calendar.timeInMillis
     }
 
     fun Calendar.getTimeOnly(): Long {
         val calendar = Calendar.getInstance()
         calendar.time = this.time
-        calendar.set(0, 0, 0, get(Calendar.HOUR_OF_DAY), get(Calendar.MINUTE), get(Calendar.MILLISECOND))
-        calendar.set(Calendar.MILLISECOND, 0)
-        return calendar.time.time
+        calendar.set(Calendar.YEAR, 0)
+        calendar.set(Calendar.MONTH, 0)
+        calendar.set(Calendar.DATE, 0)
+        return calendar.timeInMillis
     }
-    fun Calendar.formateTime(): String {
-        val formatter = SimpleDateFormat("hh:mm a")
+
+    fun Calendar.formatTime(): String {
+        val formatter = SimpleDateFormat("hh:mm a", Locale.getDefault())
         return formatter.format(time)
     }
 
-    fun Calendar.formateDate(): String {
-        val formatter = SimpleDateFormat("dd/MM/yyyy")
+    fun Calendar.formatDate(): String {
+        val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
         return formatter.format(time)
     }
 }

@@ -15,4 +15,6 @@
     <string name="save_changes">Save Changes</string>
     <string name="add_new_task">Add New Task</string>
     <string name="done">Done!</string>
+    <string name="save">Save</string>
+    <string name="isdone">isDone</string>
 </resources>
