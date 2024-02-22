@@ -1,5 +1,6 @@
 package com.example.todo.ui.tasks
 
+
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -69,7 +70,8 @@ class TasksAdapter(private var taskList: MutableList<Task> = mutableListOf()) :
                         builder.show()
                     }
 
-                } else if (direction == SwipeLayout.LEFT && position != RecyclerView.NO_POSITION) {
+                }
+                else if (direction == SwipeLayout.LEFT && position != RecyclerView.NO_POSITION) {
                     val fragmentManager =
                         (holder.context as FragmentActivity).supportFragmentManager
                     val bottomSheetFragment = EditTaskButtomSheet()
@@ -96,8 +98,6 @@ class TasksAdapter(private var taskList: MutableList<Task> = mutableListOf()) :
             holder.binding.btnTaskIsDone.isVisible = true
             holder.binding.tvTaskDone.isVisible = false
         }
-
-
     }
 
     fun changeData(allTasks: List<Task>) {

@@ -7,6 +7,7 @@ import CalendarExtensions.getTimeOnly
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,7 @@ import com.example.todo.database.model.Task
 import com.example.todo.databinding.FragmentEditTaskBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.util.Calendar
+import java.util.Locale
 
 class EditTaskButtomSheet : BottomSheetDialogFragment() {
     private lateinit var binding: FragmentEditTaskBinding
@@ -25,7 +27,7 @@ class EditTaskButtomSheet : BottomSheetDialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentEditTaskBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
@@ -51,7 +53,7 @@ class EditTaskButtomSheet : BottomSheetDialogFragment() {
         val timePickerDialog =
             TimePickerDialog(
                 requireActivity(),
-                { view, hourOfDay, minute ->
+                { _, hourOfDay, minute ->
                     calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
                     calendar.set(Calendar.MINUTE, minute)
                     binding.timeTv.text = calendar.formatTime()
@@ -67,7 +69,7 @@ class EditTaskButtomSheet : BottomSheetDialogFragment() {
     private fun showDatePicker() {
         val datePicker = DatePickerDialog(
             requireActivity(),
-            DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+            { _, year, monthOfYear, dayOfMonth ->
 
                 calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
                 calendar.set(Calendar.YEAR, year)
@@ -90,17 +92,29 @@ class EditTaskButtomSheet : BottomSheetDialogFragment() {
         calendar.timeInMillis = task.time!!
         calendar.timeInMillis = task.date!!
         binding.dateTv.text = calendar.formatDate()
-        binding.timeTv.text = calendar.formatTime()
+        val formatter = java.text.SimpleDateFormat("hh:mm a", Locale.getDefault())
+        val formatDate=formatter.format(task.time)
+        binding.timeTv.text = formatDate
         binding.checkBox.isChecked = task.isDone
     }
 
 
     private fun setupListeners() {
+        binding.checkBox.setOnCheckedChangeListener { _, isChecked ->
+            updateIsDoneStatus(isChecked)
+
+        }
         binding.saveTaskBtn.setOnClickListener {
             saveChanges()
         }
     }
-
+    private fun updateIsDoneStatus(isChecked: Boolean) {
+        taskToEdit?.let {
+            it.isDone = isChecked
+            TaskDataBase.getInstance().getTaskDao().updateTask(it)
+            Log.d("test", "${it.title},${it.content},${it.time},${it.date},${it.isDone}")
+        }
+    }
     private fun saveChanges() {
         val newTitle = binding.title.text.toString()
         val newDescription = binding.description.text.toString()
@@ -108,9 +122,10 @@ class EditTaskButtomSheet : BottomSheetDialogFragment() {
             it.title = newTitle
             it.content = newDescription
             it.date = calendar.getDateOnly()
-            it.time = calendar.getTimeOnly() // Update the time
+            it.time = calendar.getTimeOnly()
             it.isDone = binding.checkBox.isChecked
             TaskDataBase.getInstance().getTaskDao().updateTask(it)
+            Log.d("test","${it.title},${it.content},${it.time},${it.date},${it.isDone}")
         }
         dismiss()
     }
